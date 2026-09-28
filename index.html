@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jira Factuur — Turn logged Jira work into compliant Dutch invoices</title>
+<link rel="canonical" href="https://jirafactuur.nl/"><meta name="description" content="Jira Factuur turns logged worklogs into invoices that hold up, legally. Configure your company once, then invoice straight from any Jira work item.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#34524E;--teal-d:#22383A;--teal-w:#EAF0EE;--or:#F2551B;--or-d:#C73E0E;--or-w:#FFF1EA;--cream:#FDFCFA;--ink:#172B4D;--mut:#44546F;--sub:#626F86;--line:#DCDFE4;--disp:"Bricolage Grotesque",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+a{color:var(--teal)}a:hover{color:var(--or-d)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.hd{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;padding:32px 0 24px}
+.ic{width:88px;height:88px;border-radius:18px;display:block}
+.hd h1{margin:0;font:800 34px/1.1 var(--disp);letter-spacing:-.02em}
+.hd p{margin:4px 0 0;color:var(--mut);font-size:16px;text-wrap:pretty}
+.by{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--sub)}
+.cta{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.btn{display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:6px;background:var(--or);color:#fff;font:700 16px var(--disp);text-decoration:none;border:0;cursor:pointer}.btn:hover{background:var(--or-d);color:#fff}
+.btn.disabled{background:#DCDFE4;color:#626F86;cursor:not-allowed;pointer-events:none}
+.cta small{font-size:12px;color:var(--sub)}
+.tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin-bottom:28px;font-size:14px;font-weight:600;color:var(--mut);overflow-x:auto}.tabs span,.tabs a{padding:10px 0;white-space:nowrap;color:var(--mut);text-decoration:none}.tabs a:hover{color:var(--teal)}.tabs span:first-child{color:var(--teal);box-shadow:inset 0 -3px 0 var(--or)}
+.banner{position:relative;aspect-ratio:1120/548;border-radius:12px;overflow:hidden;background:var(--teal);container-type:inline-size;color:var(--cream)}
+.banner .copy{position:absolute;left:6.5cqw;top:50%;transform:translateY(-50%);width:46cqw;display:flex;flex-direction:column;gap:2.4cqw}
+.banner .brand{display:flex;align-items:center;gap:1.4cqw;font:800 2.3cqw var(--disp);letter-spacing:-.01em}.banner .brand svg{width:3.6cqw;height:3.6cqw}
+.banner h2{margin:0;font:800 5.6cqw/1.02 var(--disp);letter-spacing:-.035em;text-wrap:balance}.banner h2 em{font-style:normal;color:var(--or)}
+.banner p{margin:0;font-size:1.9cqw;line-height:1.45;color:#CFDDD9;max-width:38cqw}
+.banner .stage{position:absolute;right:0;top:0;bottom:0;width:50cqw}
+.banner .pig{position:absolute;right:9cqw;top:50%;width:25cqw;height:25cqw;transform:translateY(-52%)}
+.banner .speed{position:absolute;right:33cqw;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:2.2cqw}.banner .speed i{display:block;height:1cqw;border-radius:1cqw;background:#4E6E69}
+.chip{position:absolute;display:flex;align-items:center;gap:1cqw;background:var(--cream);color:#292524;border-radius:1cqw;padding:1cqw 1.4cqw;font-size:1.45cqw;font-weight:600;box-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.18);white-space:nowrap}
+.chip code{font:600 1.3cqw ui-monospace,Menlo,monospace;color:var(--teal)}
+.chip.inv{background:var(--or);color:#fff;font-size:1.7cqw;padding:1.3cqw 1.8cqw}.chip.inv b{font:800 2.1cqw var(--disp)}
+.chip.inv span{background:#fff;color:var(--or-d);border-radius:.6cqw;padding:.2cqw .8cqw;font-size:1.3cqw;font-weight:700}
+.pitch{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center;padding:64px 0 24px}
+.pitch h3{margin:0;font:800 34px/1.12 var(--disp);letter-spacing:-.025em;text-wrap:balance}
+.pitch ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.pitch li{display:flex;gap:12px;align-items:baseline;font-size:17px}.pitch li s{color:var(--sub);text-decoration-color:var(--or);text-decoration-thickness:2px}
+.pitch li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--or);flex:none;transform:translateY(-1px)}
+.pitch li.yes::before{background:var(--teal)}.pitch li.yes{font-weight:600}
+.hl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:48px;align-items:center;padding:48px 0}
+.hl+.hl{border-top:1px solid #EBECF0}
+.hl.flip{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}.hl.flip .txt{order:2}
+.hl .num{font:800 14px var(--disp);color:var(--or);letter-spacing:.06em}
+.hl h3{margin:6px 0 12px;font:800 30px/1.12 var(--disp);letter-spacing:-.02em;text-wrap:balance}
+.hl p{margin:0;color:var(--mut);font-size:16px;text-wrap:pretty}
+.hl figcaption{margin-top:10px;font-size:13px;color:var(--sub)}
+.shot{aspect-ratio:1840/900;border-radius:10px;overflow:hidden;container-type:inline-size;position:relative;display:grid;place-items:center}
+.shot.t{background:var(--teal-w)}.shot.o{background:var(--or-w)}
+.win{background:#fff;border:1px solid var(--line);border-radius:1.2cqw;box-shadow:0 1cqw 3cqw rgba(9,30,66,.12);font-size:1.75cqw;line-height:1.4;color:var(--ink);overflow:hidden}
+.win .bar{display:flex;align-items:center;gap:1cqw;padding:1.2cqw 1.8cqw;border-bottom:1px solid #EBECF0;font-weight:600}
+.win .bar svg{width:2.6cqw;height:2.6cqw}
+.row{display:grid;grid-template-columns:3cqw 9cqw minmax(0,1fr) 7cqw 10cqw;gap:1.2cqw;align-items:center;padding:1.1cqw 1.8cqw;border-bottom:1px solid #F1F2F4}
+.row.h{font-size:1.3cqw;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--sub)}
+.row code{font:600 1.5cqw ui-monospace,Menlo,monospace;color:#0C66E4}
+.row .r{text-align:right;font-variant-numeric:tabular-nums}
+.cb{width:2cqw;height:2cqw;border-radius:.4cqw;background:#0C66E4;position:relative}.cb::after{content:"";position:absolute;left:.65cqw;top:.3cqw;width:.5cqw;height:1cqw;border:solid #fff;border-width:0 .3cqw .3cqw 0;transform:rotate(45deg)}
+.roles{display:flex;flex-direction:column}.roles div{display:flex;justify-content:space-between;padding:1.1cqw 1.8cqw;border-bottom:1px solid #F1F2F4}.roles div span:last-child{font-variant-numeric:tabular-nums;font-weight:600}
+.rf{display:flex;border:1px solid #8590A2;border-radius:.5cqw;overflow:hidden;height:3.6cqw;align-items:stretch;font-variant-numeric:tabular-nums}.rf em{font-style:normal;color:var(--sub);background:#F7F8F9;border-right:1px solid var(--line);padding:0 .9cqw;display:flex;align-items:center}.rf b{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;padding:0 .9cqw;font-weight:500}.rf span{white-space:nowrap;flex:none;background:#E9F2FF;color:#0055CC;border-left:1px solid var(--line);padding:0 1cqw;display:flex;align-items:center;font-weight:600;font-size:1.5cqw}
+.menu{position:absolute;background:#fff;border:1px solid var(--line);border-radius:.8cqw;box-shadow:0 .8cqw 2cqw rgba(9,30,66,.2);padding:.6cqw 0;font-size:1.55cqw;min-width:17cqw}.menu div{display:flex;justify-content:space-between;gap:2cqw;padding:.6cqw 1.6cqw}.menu div.on{background:#E9F2FF;color:#0055CC;font-weight:600}.menu small{color:var(--sub);font-size:1.5cqw;font-variant-numeric:tabular-nums}
+.cb.off{background:#fff;border:.2cqw solid #8590A2}.cb.off::after{display:none}
+.row.dim>*:not(:first-child){opacity:.45}
+.warn{display:inline-grid;place-items:center;width:2.2cqw;height:2.2cqw;border-radius:50%;background:#FFF7D6;color:#A54800;font-weight:800;font-size:1.4cqw;margin-left:.6cqw;vertical-align:middle}
+.tip{position:absolute;background:#172B4D;color:#fff;border-radius:.8cqw;padding:1cqw 1.4cqw;font-size:1.45cqw;line-height:1.35;box-shadow:0 .6cqw 1.6cqw rgba(9,30,66,.3)}
+.foot{display:flex;justify-content:space-between;align-items:center;padding:1.4cqw 1.8cqw;background:#F7F8F9}
+.foot b{font:800 2.4cqw var(--disp);font-variant-numeric:tabular-nums}
+.pbtn{background:#0C66E4;color:#fff;border-radius:.6cqw;padding:.8cqw 1.6cqw;font-weight:600;font-size:1.6cqw}
+.vat{display:flex;flex-direction:column;gap:.9cqw;padding:1.8cqw}
+.opt{display:flex;align-items:center;gap:1.2cqw;border:1px solid var(--line);border-radius:.8cqw;padding:1cqw 1.4cqw}
+.opt i{width:2cqw;height:2cqw;border-radius:50%;border:.2cqw solid #8590A2;flex:none}
+.opt.on{border:.25cqw solid #0C66E4;background:#E9F2FF}.opt.on i{border:.6cqw solid #0C66E4}
+.opt small{margin-left:auto;color:var(--sub);font-size:1.4cqw}
+.stmt{border-left:.5cqw solid var(--teal);background:var(--teal-w);padding:1.2cqw 1.6cqw;font-size:1.5cqw;color:#22383A;border-radius:0 .6cqw .6cqw 0}
+.stop{display:flex;gap:1.2cqw;align-items:flex-start;background:#FFECEB;border:1px solid #FFD5D2;border-radius:.8cqw;padding:1.3cqw 1.6cqw;font-size:1.5cqw;color:#5D1F1A}.stop b{display:block;color:#AE2E24}
+.stop i{width:2.4cqw;height:2.4cqw;border-radius:50%;background:#C9372C;color:#fff;font-style:normal;font-weight:800;display:grid;place-items:center;flex:none;font-size:1.5cqw}
+.paper{background:var(--cream);border:1px solid #E7E5E4;border-radius:.6cqw;box-shadow:0 1cqw 3cqw rgba(9,30,66,.12);padding:2.4cqw;display:flex;flex-direction:column;gap:1.6cqw;color:#292524;font-size:1.6cqw}
+.paper .t{display:flex;justify-content:space-between;align-items:baseline;border-bottom:.3cqw solid var(--teal);padding-bottom:1cqw;font:800 2.4cqw var(--disp);color:var(--teal)}.paper .t small{font:500 1.4cqw system-ui;color:#78716C}
+.paper .tot{display:flex;justify-content:space-between;font-weight:700;font-size:2.1cqw;color:#22383A;font-variant-numeric:tabular-nums}
+.paper .qr{display:flex;gap:1.6cqw;align-items:center;font-size:1.4cqw;color:#57534E}
+.paper .qr i{width:9cqw;height:9cqw;flex:none;border:.5cqw solid var(--cream);outline:1px solid #E7E5E4;background:repeating-conic-gradient(#1C1917 0 25%,transparent 0 50%) 0 0/2.25cqw 2.25cqw}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.6cqw}
+.tl li{display:grid;grid-template-columns:3cqw minmax(0,1fr);gap:1.2cqw;align-items:center;font-size:1.7cqw}
+.tl li i{width:3cqw;height:3cqw;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:1.5cqw;color:#fff;background:var(--teal)}
+.tl li.rm i{background:var(--or)}.tl li.pd i{background:#22A06B}
+.tl li small{display:block;color:var(--sub);font-size:1.35cqw}
+.story{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;background:var(--or-w);border-radius:16px;padding:48px;margin:40px 0}
+.story svg{width:140px;height:140px}
+.story .k{font:800 14px var(--disp);color:var(--or-d);letter-spacing:.06em;text-transform:uppercase}
+.story h3{margin:6px 0 14px;font:800 30px/1.15 var(--disp);letter-spacing:-.02em;text-wrap:balance}
+.story p{margin:0;font-size:17px;color:#3B2A22;max-width:640px;text-wrap:pretty}
+.cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:48px;padding:24px 0 72px}
+.cols h4{margin:0 0 14px;font:800 22px var(--disp);letter-spacing:-.01em}
+.cols ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;color:var(--mut)}.cols li b{color:var(--ink)}
+.price{border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px;align-self:start}
+.price .big{font:800 26px var(--disp);letter-spacing:-.01em}
+.price ul{padding-left:18px;font-size:14px}
+.res{display:flex;flex-direction:column;gap:6px;font-size:14px}.res span{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #EBECF0;padding-top:8px}
+footer.site{padding:32px 0 48px;font-size:13px;color:var(--sub);border-top:1px solid var(--line)}
+footer.site .wrap{display:flex;gap:12px 24px;flex-wrap:wrap;justify-content:space-between}
+@media (max-width:860px){.hd{grid-template-columns:auto minmax(0,1fr)}.cta{grid-column:1/-1;align-items:flex-start}.pitch,.hl,.cols{grid-template-columns:1fr;gap:24px}.hl.flip .txt{order:0}.story{grid-template-columns:1fr;padding:28px}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="pig" viewBox="0 0 64 64"><g transform="translate(6 0) skewX(-9)"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 28C6 25 9 21 12 24C14 17 24 13 34 14L38 8L41 15C47 17 51 21 52 25L57 26V34H52C50 40 46 42 44 43V51H38L37 46C31 47 26 47 22 46L21 51H15V43C11 40 10 34 12 24"></path><path d="M26 21H34"></path></g><circle cx="47" cy="24" r="2.4" fill="currentColor"></circle></g></symbol>
+</defs></svg>
+<div class="wrap">
+<header class="hd">
+<svg class="ic" viewBox="0 0 64 64" aria-label="Jira Factuur icon"><rect width="64" height="64" rx="15" fill="#34524E"></rect><use href="#pig" color="#F2551B"></use></svg>
+<div><h1>Jira Factuur</h1><p>Turn logged Jira work into invoices that hold up, sent straight to your client.</p><div class="by"><span>Paid via Atlassian</span><span>Jira Cloud</span><span>English · Nederlands</span></div></div>
+<div class="cta"><span class="btn disabled" aria-disabled="true">Coming soon</span><small>Launching on the Atlassian Marketplace</small></div>
+</header>
+<nav class="tabs"><span>Overview</span><a href="docs/">Documentation</a><a href="privacy/">Privacy &amp; security</a><a href="privacy/#support">Support</a></nav>
+
+<section class="banner" id="banner">
+<div class="copy">
+<div class="brand"><svg viewBox="0 0 64 64"><use href="#pig" color="#F2551B"></use></svg>Jira Factuur</div>
+<h2>From worklog to <em>paid invoice</em>, without leaving Jira.</h2>
+<p>Built for freelancers and agencies who bill their hours. Month-end invoicing in minutes, not an afternoon.</p>
+</div>
+<div class="stage">
+<div class="speed" aria-hidden="true"><i style="width:9cqw"></i><i style="width:13cqw;margin-left:-4cqw"></i><i style="width:7cqw"></i></div>
+<div class="chip" style="left:0;top:16%"><code>JF-112</code>12,00 u</div>
+<div class="chip" style="left:5cqw;top:44%"><code>JF-118</code>6,50 u</div>
+<div class="chip" style="left:1cqw;top:70%"><code>JF-121</code>3,00 u</div>
+<svg class="pig" viewBox="0 0 64 64" aria-hidden="true"><use href="#pig" color="#F2551B"></use></svg>
+<div class="chip inv" style="right:3.5cqw;bottom:13%">Factuur 2026-014 <b>€ 2.757,29</b><span>Betaald</span></div>
+</div>
+</section>
+
+<section class="pitch">
+<h3>Your hours are already in Jira. Why bill them from somewhere else?</h3>
+<ul>
+<li><s>Copying worklogs into a spreadsheet</s></li>
+<li><s>Billing something twice</s></li>
+<li><s>Forgetting to send a reminder</s></li>
+<li><s>No idea what your logged work is worth</s></li>
+<li class="yes">See your billed hours and their value, and get paid, without leaving Jira.</li>
+</ul>
+</section>
+
+<figure class="hl" style="margin:0">
+<div class="txt"><div class="num">01</div><h3>Invoice straight from Jira, never double-billed</h3><p>Declare an invoice from a single work item, an epic, a sprint, even a subtask. Hours come only from what you actually logged, one line per item, so nothing already invoiced gets charged twice.</p></div>
+<div><div class="shot t">
+<div class="win" style="width:78%">
+<div class="bar"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#34524E"></rect><use href="#pig" color="#FDFCFA"></use></svg>Declare invoice · Klant B B.V.</div>
+<div class="row h"><span></span><span>Item</span><span>Description</span><span class="r">Hours</span><span class="r">Amount</span></div>
+<div class="row"><span class="cb"></span><code>JF-112</code><span>Checkout redesign</span><span class="r">12,00</span><span class="r">€ 1.140,00</span></div>
+<div class="row"><span class="cb"></span><code>JF-118</code><span>Payment webhook</span><span class="r">6,50</span><span class="r">€ 617,50</span></div>
+<div class="row dim"><span class="cb off"></span><code>JF-104</code><span>Login flow<span class="warn">!</span></span><span class="r">4,00</span><span class="r">€ 380,00</span></div>
+<div class="row"><span class="cb"></span><code>JF-121</code><span>Design review</span><span class="r">3,00</span><span class="r">€ 330,00</span></div>
+<div class="foot"><span>Total excl. VAT <b>€ 2.087,50</b></span><span class="pbtn">Declare invoice</span></div>
+</div>
+<div class="tip" style="left:43%;top:57%">Already billed on invoice 2026-011</div>
+</div><figcaption>Hours come from worklogs. Anything billed before is flagged and left out.</figcaption></div>
+</figure>
+
+<figure class="hl flip" style="margin:0">
+<div class="txt"><div class="num">02</div><h3>Rates per role, for agencies and mixed teams</h3><p>Set a rate for each role once: designer, developer, consultant. When you declare an invoice, pick the role on each line and its rate fills in. No typing rates, no looking them up, and every client gets the same price for the same work.</p></div>
+<div><div class="shot o">
+<div style="display:grid;grid-template-columns:.62fr 1.38fr;gap:2.4cqw;width:92%;align-items:start;position:relative;padding-bottom:17cqw">
+<div class="win"><div class="bar">Roles and rates</div><div class="roles"><div><span>Designer</span><span>€ 85</span></div><div><span>Developer</span><span>€ 95</span></div><div><span>Consultant</span><span>€ 110</span></div><div style="color:#0C66E4;font-weight:600;border-bottom:0;white-space:nowrap"><span>+ Add a role</span></div></div></div>
+<div class="win"><div class="bar">Declare invoice</div>
+<div class="row h" style="grid-template-columns:8cqw 6cqw minmax(0,1fr)"><span>Item</span><span>Hours</span><span class="r">Rate per hour</span></div>
+<div class="row" style="grid-template-columns:8cqw 6cqw minmax(0,1fr)"><code>JF-112</code><span>12,00</span><div class="rf"><em>€</em><b>95,00</b><span>Developer</span></div></div>
+<div class="row" style="grid-template-columns:8cqw 6cqw minmax(0,1fr)"><code>JF-121</code><span>3,00</span><div class="rf"><em>€</em><b>110,00</b><span>Consultant</span></div></div>
+<div class="row" style="grid-template-columns:8cqw 6cqw minmax(0,1fr);border-bottom:0"><code>JF-126</code><span>5,00</span><div class="rf" style="border-color:#388BFF;box-shadow:inset 0 0 0 1px #388BFF"><em>€</em><b>85,00</b><span>Designer ▴</span></div></div>
+</div>
+<div class="menu" style="right:1.8cqw;top:calc(100% - 17cqw + .4cqw)"><div><span>Own rate</span><small></small></div><div class="on"><span>Designer</span><small>€ 85</small></div><div><span>Developer</span><small>€ 95</small></div><div><span>Consultant</span><small>€ 110</small></div></div>
+</div>
+</div><figcaption>Define roles once in Settings; pick one per line when you invoice.</figcaption></div>
+</figure>
+
+<figure class="hl" style="margin:0">
+<div class="txt"><div class="num">03</div><h3>VAT and legal requirements, sorted</h3><p>21%, 9%, 0%, reverse charge, KOR or your own custom rate, each with the correct statement printed for you. Miss a required field and the invoice won't be issued, so what goes out always holds up.</p></div>
+<div><div class="shot o">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw;width:86%;align-items:center">
+<div class="win"><div class="bar">VAT</div><div class="vat">
+<div class="opt"><i></i>21% standaard</div>
+<div class="opt"><i></i>9% verlaagd</div>
+<div class="opt on"><i></i>Btw verlegd<small>EU client</small></div>
+<div class="opt"><i></i>KOR, vrijgesteld</div>
+<div class="opt"><i></i>Custom rate<small>e.g. 19%</small></div>
+<div class="stmt">"Btw verlegd" is printed on the invoice, with both VAT numbers.</div>
+</div></div>
+<div class="stop"><i>!</i><div><b>Not issued yet</b>Add your KvK number in Settings. Dutch invoices need it.</div></div>
+</div>
+</div><figcaption>Pick the regime once; the right legal text is added. Missing details stop the invoice, not your client.</figcaption></div>
+</figure>
+
+<figure class="hl flip" style="margin:0">
+<div class="txt"><div class="num">04</div><h3>Get paid faster</h3><p>Email the invoice with the PDF attached, add a QR code so clients pay in one tap, and reminders go out automatically before and on the due date, so you never have to chase. Or send one yourself, whenever you like.</p></div>
+<div><div class="shot t">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:3cqw;width:82%;align-items:center">
+<div class="paper"><div class="t">Factuur 2026-014<small>Bitflare B.V.</small></div><div class="tot"><span>Totaal</span><span>€ 2.757,29</span></div><div class="qr"><i></i>Scan with your banking app to pay the exact amount.</div></div>
+<ol class="tl">
+<li><i>✓</i><div>Sent to Klant B<small>1 okt · facturen@klantb.nl</small></div></li>
+<li class="rm"><i>1</i><div>Reminder, 3 days before due<small>8 okt · automatic</small></div></li>
+<li class="pd"><i>€</i><div>Paid<small>10 okt · via QR</small></div></li>
+</ol>
+</div>
+</div><figcaption>Sent, reminded and paid, tracked on every invoice.</figcaption></div>
+</figure>
+
+<section class="story">
+<svg viewBox="0 0 64 64" aria-hidden="true"><use href="#pig" color="#F2551B"></use></svg>
+<div><div class="k">Built by a freelancer</div><h3>Made by someone who lost too many Friday afternoons to invoicing.</h3>
+<p>A freelance developer in the Netherlands tracked every project in Jira, for several clients, then copied the worklogs somewhere else to bill them. Reminders went out by hand, and things slipped. So he built Jira Factuur for himself, and published it so you can focus on the work you love and leave the error-prone, repetitive part to a tool.</p></div>
+</section>
+
+<section class="cols">
+<div><h4>More details</h4>
+<p style="margin:0 0 14px;color:var(--mut)">Built with Dutch compliance in mind, and just as at home with any freelancer or agency, anywhere, who tracks billable hours in Jira and needs invoices that hold up.</p>
+<ul>
+<li><b>Rates per role, for agencies and mixed teams:</b> set a rate for each role once (designer, developer, consultant), then pick the role on each invoice line instead of typing a rate.</li>
+<li><b>VAT handled correctly:</b> 21%, 9%, 0%, reverse charge, KOR or a custom rate, each with the required legal statement.</li>
+<li><b>Three invoice templates</b> (letterhead, ledger, minimal) in your own colour, logo included, previewed live while you set up.</li>
+<li><b>A payment QR code</b> on every invoice, so clients pay in one tap.</li>
+<li><b>Email and reminders:</b> the PDF goes straight to your client, with automatic reminders before and on the due date.</li>
+<li><b>English or Dutch</b>, for the app and for your invoices.</li>
+</ul></div>
+<aside class="price"><div class="big">30 days free</div><div style="color:var(--mut);font-size:14px">Then paid per user, billed through Atlassian.</div>
+<span class="btn disabled" aria-disabled="true" style="align-self:flex-start">Coming soon</span>
+<div class="res"><span>Documentation <a href="docs/">View</a></span><span>Privacy policy <a href="privacy/">View</a></span><span>Support <a href="privacy/#support">Contact us</a></span></div></aside>
+</section>
+</div>
+<footer class="site"><div class="wrap"><span>© 2026 Bit Flare Software ontwikkeling · <a href="docs/">Documentation</a> · <a href="privacy/">Privacy &amp; support</a></span><span>Not yet listed on the Atlassian Marketplace</span></div></footer>
+</body></html>

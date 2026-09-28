@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jira Factuur — How it works</title>
+<link rel="canonical" href="https://jirafactuur.nl/docs"><meta name="description" content="How Jira Factuur turns logged Jira work into compliant Dutch invoices, in four steps.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#34524E;--teal-d:#22383A;--teal-w:#EAF0EE;--or:#F2551B;--or-d:#C73E0E;--or-w:#FFF1EA;--cream:#FDFCFA;--ink:#172B4D;--mut:#44546F;--sub:#626F86;--line:#DCDFE4;--disp:"Bricolage Grotesque",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEBE7;color:var(--ink);font:14px/1.5 -apple-system,"Segoe UI",system-ui,sans-serif}
+.pagenav{max-width:210mm;margin:16px auto 0;padding:0 16px;display:flex;gap:16px;font-size:13px}
+.pagenav a{color:var(--teal);text-decoration:none;font-weight:600}.pagenav a:hover{color:var(--or-d)}
+.sheet{max-width:210mm;min-height:297mm;margin:12px auto 20px;background:var(--cream);border:1px solid var(--line);border-radius:10px;box-shadow:0 4px 24px rgba(23,43,77,.08);padding:14mm 16mm;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:34px;height:34px}
+.brand b{font:800 22px var(--disp);letter-spacing:-.02em;color:var(--teal-d)}
+header h1{margin:14px 0 4px;font:800 clamp(22px,3.4vw,30px)/1.1 var(--disp);letter-spacing:-.03em}
+header h1 em{font-style:normal;color:var(--or)}
+header p{margin:0;color:var(--mut);font-size:14px;max-width:620px}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px;flex:1}
+.step{border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:#fff}
+.step .row{display:flex;align-items:center;gap:10px}
+.step .num{flex:none;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;font:800 12px var(--disp);display:flex;align-items:center;justify-content:center}
+.step h2{margin:0;font:700 15px/1.2 var(--disp);letter-spacing:-.01em;color:var(--teal-d)}
+.step p{margin:0;color:var(--ink);font-size:12.5px;line-height:1.5;text-wrap:pretty}
+.shot{border:1px solid var(--line);border-radius:6px;background:#F7F8F9;height:150px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shot img{max-width:100%;max-height:100%;object-fit:contain}
+footer{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--sub)}
+footer a{color:var(--teal)}
+@media print{
+  body{background:#fff}
+  .pagenav{display:none}
+  .sheet{margin:0;max-width:none;min-height:0;box-shadow:none;border:0;border-radius:0}
+  @page{size:A4;margin:12mm}
+}
+</style></head>
+<body>
+<nav class="pagenav"><a href="../">← Jira Factuur</a><a href="../privacy/">Privacy &amp; support</a></nav>
+<div class="sheet">
+<header>
+<div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#22383A"></rect><g transform="translate(6 0) skewX(-9)"><g fill="none" stroke="#F2551B" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 28C6 25 9 21 12 24C14 17 24 13 34 14L38 8L41 15C47 17 51 21 52 25L57 26V34H52C50 40 46 42 44 43V51H38L37 46C31 47 26 47 22 46L21 51H15V43C11 40 10 34 12 24"></path><path d="M26 21H34"></path></g><circle cx="47" cy="24" r="2.4" fill="#F2551B"></circle></g></svg><b>Jira Factuur</b></div>
+<h1>Turn logged Jira work into <em>compliant Dutch invoices</em></h1>
+<p>Configure your company once. From then on, invoice straight from any work item, epic, sprint or project — built from hours you actually logged, never estimates, never billed twice.</p>
+</header>
+<div class="steps">
+
+<div class="step">
+<div class="row"><span class="num">1</span><h2>Set up your company — once</h2></div>
+<div class="shot"><img src="images/settings_3_start_the_setup_wizard_or_fill_the_form.png" alt="Company and invoice details settings form"></div>
+<p>Open <b>Jira admin settings → Marketplace apps → Jira Factuur</b>. Run the setup wizard or fill in the form yourself: company details, VAT regime, IBAN and a default hourly rate. Add your clients and customise the email and reminder texts here too — you won't need to touch this page again to invoice.</p>
+</div>
+
+<div class="step">
+<div class="row"><span class="num">2</span><h2>Mark what's billable</h2></div>
+<div class="shot"><img src="images/Billable_invoice_description.png" alt="Billable toggle and invoice description on a work item"></div>
+<p>Every work item gets two fields: <b>Billable</b> (on by default — switch it off for work that shouldn't be charged) and an optional <b>Invoice description</b> to clarify what a line means to the client.</p>
+</div>
+
+<div class="step">
+<div class="row"><span class="num">3</span><h2>Declare an invoice</h2></div>
+<div class="shot"><img src="images/Declare_invoice_with_multiple_childItems.png" alt="Declare an invoice dialog with multiple child work items"></div>
+<p>Trigger <b>Declare an invoice</b> from a work item, epic, sprint or project. Hours come only from logged time, one line per item — so work already on an earlier invoice is flagged, never charged twice. Review rates, discounts and VAT, then issue.</p>
+</div>
+
+<div class="step">
+<div class="row"><span class="num">4</span><h2>Get paid</h2></div>
+<div class="shot"><img src="images/invoice_overview_1.png" alt="Invoice overview list with statuses"></div>
+<p>The project's <b>Invoices</b> tab tracks every invoice's status — open, overdue or paid. From there, email the PDF straight to your client with a payment QR code attached, or download it yourself, and turn on automatic reminders before and on the due date.</p>
+</div>
+
+</div>
+<footer><span>Jira Factuur — built for ZZP'ers and secondment agencies billing from Jira</span><span>Privacy, security &amp; support: <a href="../privacy/">jirafactuur.nl/privacy</a></span></footer>
+</div>
+</body></html>
