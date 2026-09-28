@@ -5,19 +5,39 @@
 <style>
 :root{--teal:#34524E;--teal-d:#22383A;--teal-w:#EAF0EE;--or:#F2551B;--or-d:#C73E0E;--or-w:#FFF1EA;--cream:#FDFCFA;--ink:#172B4D;--mut:#44546F;--sub:#626F86;--line:#DCDFE4;--disp:"Bricolage Grotesque",system-ui,sans-serif}
 *{box-sizing:border-box}
-body{margin:0;background:#fff;color:var(--ink);font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:#fff;color:var(--ink);font:15px/1.6 -apple-system,"Segoe UI",system-ui,sans-serif}
 a{color:var(--teal)}a:hover{color:var(--or-d)}
-.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* Persistent top bar */
+.topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.topbar-in{display:flex;align-items:center;gap:28px;padding:14px 0}
+.brand-mini{display:flex;align-items:center;gap:8px;font:800 18px var(--disp);color:var(--ink);text-decoration:none;flex:none}
+.brand-mini:hover{color:var(--ink)}
+.brand-mini svg{width:30px;height:30px}
+.tabs{display:flex;gap:22px;flex:1;overflow-x:auto}
+.tabs a{padding:6px 0;font-size:14px;font-weight:600;color:var(--mut);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--teal)}
+.tabs a.active{color:var(--teal-d);border-color:var(--or)}
+
+/* Shared bits */
+.btn{display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:6px;background:var(--or);color:#fff;font:700 16px var(--disp);text-decoration:none;border:0;cursor:pointer}.btn:hover{background:var(--or-d);color:#fff}.btn:disabled{opacity:.6;cursor:default}
+.btn.disabled{background:#DCDFE4;color:#626F86;cursor:not-allowed;pointer-events:none}
+.muted{color:var(--mut)!important}
+.panel-head{margin:40px 0 28px}
+.panel-head h2{margin:0 0 8px;font:800 32px/1.1 var(--disp);letter-spacing:-.025em}
+.panel-head p{margin:0;color:var(--mut);font-size:15px;max-width:640px;text-wrap:pretty}
+
+/* Overview panel */
 .hd{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;padding:32px 0 24px}
 .ic{width:88px;height:88px;border-radius:18px;display:block}
 .hd h1{margin:0;font:800 34px/1.1 var(--disp);letter-spacing:-.02em}
 .hd p{margin:4px 0 0;color:var(--mut);font-size:16px;text-wrap:pretty}
 .by{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--sub)}
 .cta{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.btn{display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:6px;background:var(--or);color:#fff;font:700 16px var(--disp);text-decoration:none;border:0;cursor:pointer}.btn:hover{background:var(--or-d);color:#fff}
-.btn.disabled{background:#DCDFE4;color:#626F86;cursor:not-allowed;pointer-events:none}
 .cta small{font-size:12px;color:var(--sub)}
-.tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin-bottom:28px;font-size:14px;font-weight:600;color:var(--mut);overflow-x:auto}.tabs span,.tabs a{padding:10px 0;white-space:nowrap;color:var(--mut);text-decoration:none}.tabs a:hover{color:var(--teal)}.tabs span:first-child{color:var(--teal);box-shadow:inset 0 -3px 0 var(--or)}
 .banner{position:relative;aspect-ratio:1120/548;border-radius:12px;overflow:hidden;background:var(--teal);container-type:inline-size;color:var(--cream)}
 .banner .copy{position:absolute;left:6.5cqw;top:50%;transform:translateY(-50%);width:46cqw;display:flex;flex-direction:column;gap:2.4cqw}
 .banner .brand{display:flex;align-items:center;gap:1.4cqw;font:800 2.3cqw var(--disp);letter-spacing:-.01em}.banner .brand svg{width:3.6cqw;height:3.6cqw}
@@ -93,21 +113,79 @@ a{color:var(--teal)}a:hover{color:var(--or-d)}
 .price .big{font:800 26px var(--disp);letter-spacing:-.01em}
 .price ul{padding-left:18px;font-size:14px}
 .res{display:flex;flex-direction:column;gap:6px;font-size:14px}.res span{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #EBECF0;padding-top:8px}
-footer.site{padding:32px 0 48px;font-size:13px;color:var(--sub);border-top:1px solid var(--line)}
+
+/* Documentation panel */
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+.step{border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;background:#fff}
+.step .steprow{display:flex;align-items:center;gap:10px}
+.step .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font:800 13px var(--disp);display:flex;align-items:center;justify-content:center}
+.step h3{margin:0;font:700 16px/1.2 var(--disp);letter-spacing:-.01em;color:var(--teal-d)}
+.step p{margin:0;color:var(--ink);font-size:13.5px;line-height:1.55;text-wrap:pretty}
+.stepshot{border:1px solid var(--line);border-radius:8px;background:#F7F8F9;height:170px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stepshot img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* Privacy/Security/Support panels */
+.subsection{padding:0 0 40px}
+.subsection+.subsection{padding-top:40px;border-top:1px solid var(--line)}
+.sh{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px}
+.sh>header .k{font:700 12px var(--disp);letter-spacing:.12em;text-transform:uppercase;color:var(--or-d)}
+.sh>header h3{margin:6px 0 0;font:800 24px/1.1 var(--disp);letter-spacing:-.02em}
+.body{display:flex;flex-direction:column;gap:28px;min-width:0}
+.body h4{margin:0 0 8px;font:700 17px/1.25 var(--disp);letter-spacing:-.01em}
+.body p{margin:0;text-wrap:pretty;color:var(--ink)}.body p+p{margin-top:10px}
+ul.list{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.list li{position:relative;padding-left:22px}ul.list li::before{content:"";position:absolute;left:4px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--or)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.card h4{margin:0}.card p{font-size:14.5px}
+.card.hl{background:var(--teal-w);border-color:#C9D8D4}
+table{width:100%;border-collapse:collapse;font-size:14.5px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}
+th{font:700 12px var(--disp);letter-spacing:.08em;text-transform:uppercase;color:var(--sub);background:#F7F8F9}
+td:first-child{font-weight:600;width:34%}
+.tag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:700;white-space:nowrap}
+.tag.in{background:var(--teal-w);color:var(--teal-d)}.tag.out{background:var(--or-w);color:var(--or-d)}
+.scroll{overflow-x:auto}
+.chan{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.chan .card b{font:700 16px var(--disp)}.chan .card a{font-weight:600;word-break:break-word}
+form{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}.f.w{grid-column:1/-1}
+label{font-size:13px;font-weight:600;color:var(--mut)}label i{font-style:normal;color:var(--sub);font-weight:400}
+input,select,textarea{font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid #B7B9BE;border-radius:4px;padding:9px 11px;width:100%}
+textarea{min-height:130px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--teal);outline-offset:0;border-color:var(--teal)}
+.fa{grid-column:1/-1;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.fa small{color:var(--sub);font-size:13px;max-width:520px}
+.msg{grid-column:1/-1;border-radius:6px;padding:12px 14px;font-size:14px;display:none}.msg.ok{display:block;background:var(--teal-w);color:var(--teal-d)}.msg.err{display:block;background:#FFECEB;color:#AE2E24}
+dl{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 24px;font-size:15px}dt{color:var(--sub)}dd{margin:0}
+
+footer.site{padding:32px 0 48px;font-size:13px;color:var(--sub);border-top:1px solid var(--line);margin-top:24px}
 footer.site .wrap{display:flex;gap:12px 24px;flex-wrap:wrap;justify-content:space-between}
-@media (max-width:860px){.hd{grid-template-columns:auto minmax(0,1fr)}.cta{grid-column:1/-1;align-items:flex-start}.pitch,.hl,.cols{grid-template-columns:1fr;gap:24px}.hl.flip .txt{order:0}.story{grid-template-columns:1fr;padding:28px}}
+@media (max-width:860px){.hd{grid-template-columns:auto minmax(0,1fr)}.cta{grid-column:1/-1;align-items:flex-start}.pitch,.hl,.cols,.sh{grid-template-columns:1fr;gap:24px}.hl.flip .txt{order:0}.story{grid-template-columns:1fr;padding:28px}.steps{grid-template-columns:1fr}}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="pig" viewBox="0 0 64 64"><g transform="translate(6 0) skewX(-9)"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 28C6 25 9 21 12 24C14 17 24 13 34 14L38 8L41 15C47 17 51 21 52 25L57 26V34H52C50 40 46 42 44 43V51H38L37 46C31 47 26 47 22 46L21 51H15V43C11 40 10 34 12 24"></path><path d="M26 21H34"></path></g><circle cx="47" cy="24" r="2.4" fill="currentColor"></circle></g></symbol>
 </defs></svg>
-<div class="wrap">
+
+<header class="topbar"><div class="wrap topbar-in">
+<a class="brand-mini" href="#overview"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#34524E"></rect><use href="#pig" color="#F2551B"></use></svg>Jira Factuur</a>
+<nav class="tabs">
+<a href="#overview" data-tab="overview">Overview</a>
+<a href="#docs" data-tab="docs">Documentation</a>
+<a href="#privacy" data-tab="privacy">Privacy &amp; security</a>
+<a href="#support" data-tab="support">Support</a>
+</nav>
+</div></header>
+
+<main class="wrap">
+
+<section class="panel" data-panel="overview">
 <header class="hd">
 <svg class="ic" viewBox="0 0 64 64" aria-label="Jira Factuur icon"><rect width="64" height="64" rx="15" fill="#34524E"></rect><use href="#pig" color="#F2551B"></use></svg>
 <div><h1>Jira Factuur</h1><p>Turn logged Jira work into invoices that hold up, sent straight to your client.</p><div class="by"><span>Paid via Atlassian</span><span>Jira Cloud</span><span>English · Nederlands</span></div></div>
 <div class="cta"><span class="btn disabled" aria-disabled="true">Coming soon</span><small>Launching on the Atlassian Marketplace</small></div>
 </header>
-<nav class="tabs"><span>Overview</span><a href="docs/">Documentation</a><a href="privacy/">Privacy &amp; security</a><a href="privacy/#support">Support</a></nav>
 
 <section class="banner" id="banner">
 <div class="copy">
@@ -218,8 +296,128 @@ footer.site .wrap{display:flex;gap:12px 24px;flex-wrap:wrap;justify-content:spac
 </ul></div>
 <aside class="price"><div class="big">30 days free</div><div style="color:var(--mut);font-size:14px">Then paid per user, billed through Atlassian.</div>
 <span class="btn disabled" aria-disabled="true" style="align-self:flex-start">Coming soon</span>
-<div class="res"><span>Documentation <a href="docs/">View</a></span><span>Privacy policy <a href="privacy/">View</a></span><span>Support <a href="privacy/#support">Contact us</a></span></div></aside>
+<div class="res"><span>Documentation <a href="#docs">View</a></span><span>Privacy policy <a href="#privacy">View</a></span><span>Support <a href="#support">Contact us</a></span></div></aside>
 </section>
+</section>
+
+<section class="panel" data-panel="docs" hidden>
+<div class="panel-head"><h2>How it works</h2><p>Configure your company once. From then on, invoice straight from any work item, epic, sprint or project — built from hours you actually logged, never estimates, never billed twice.</p></div>
+<div class="steps">
+
+<div class="step">
+<div class="steprow"><span class="num">1</span><h3>Set up your company — once</h3></div>
+<div class="stepshot"><img src="images/settings_3_start_the_setup_wizard_or_fill_the_form.png" alt="Company and invoice details settings form"></div>
+<p>Open <b>Jira admin settings → Marketplace apps → Jira Factuur</b>. Run the setup wizard or fill in the form yourself: company details, VAT regime, IBAN and a default hourly rate. Add your clients and customise the email and reminder texts here too — you won't need to touch this page again to invoice.</p>
 </div>
-<footer class="site"><div class="wrap"><span>© 2026 Bit Flare Software ontwikkeling · <a href="docs/">Documentation</a> · <a href="privacy/">Privacy &amp; support</a></span><span>Not yet listed on the Atlassian Marketplace</span></div></footer>
+
+<div class="step">
+<div class="steprow"><span class="num">2</span><h3>Mark what's billable</h3></div>
+<div class="stepshot"><img src="images/Billable_invoice_description.png" alt="Billable toggle and invoice description on a work item"></div>
+<p>Every work item gets two fields: <b>Billable</b> (on by default — switch it off for work that shouldn't be charged) and an optional <b>Invoice description</b> to clarify what a line means to the client.</p>
+</div>
+
+<div class="step">
+<div class="steprow"><span class="num">3</span><h3>Declare an invoice</h3></div>
+<div class="stepshot"><img src="images/Declare_invoice_with_multiple_childItems.png" alt="Declare an invoice dialog with multiple child work items"></div>
+<p>Trigger <b>Declare an invoice</b> from a work item, epic, sprint or project. Hours come only from logged time, one line per item — so work already on an earlier invoice is flagged, never charged twice. Review rates, discounts and VAT, then issue.</p>
+</div>
+
+<div class="step">
+<div class="steprow"><span class="num">4</span><h3>Get paid</h3></div>
+<div class="stepshot"><img src="images/invoice_overview_1.png" alt="Invoice overview list with statuses"></div>
+<p>The project's <b>Invoices</b> tab tracks every invoice's status — open, overdue or paid. From there, email the PDF straight to your client with a payment QR code attached, or download it yourself, and turn on automatic reminders before and on the due date.</p>
+</div>
+
+</div>
+</section>
+
+<section class="panel" data-panel="privacy" hidden>
+<div class="panel-head"><h2>Privacy &amp; security</h2><p>Your invoices stay in your Jira. Here's how Jira Factuur handles your data, and how it's secured.</p></div>
+
+<div class="subsection"><div class="sh"><header><div class="k">01</div><h3>Privacy</h3></header><div class="body">
+<div><h4>The short version</h4><p>Jira Factuur runs on Atlassian Forge, inside your Jira Cloud site. Your company details, clients, roles and invoices are stored in Atlassian's storage for your site. We have no database of our own and no way to read it.</p><p>The app sends something outside Atlassian in one case only: when you press <b>Send to client</b>, the invoice email and its PDF go out through our email provider.</p></div>
+<div><h4>What the app stores</h4><p class="muted">All of it is stored in Atlassian's storage for your Jira site, and none of it is shared between sites.</p>
+<ul class="list"><li>Your company profile: name, address, KvK and VAT numbers, IBAN, logo and invoice footer.</li><li>Your clients, and the roles and rates you define.</li><li>Issued invoices, the invoice number counter and your reminder settings.</li><li>Two Jira fields the app adds to work items: <i>Billable</i> and <i>Invoice description</i>.</li></ul></div>
+<div><h4>What it reads from Jira, and why</h4><div class="scroll"><table><thead><tr><th>Permission</th><th>Used for</th></tr></thead><tbody>
+<tr><td>Read work items</td><td>Work item summaries and logged time, to build invoice lines.</td></tr>
+<tr><td>Read sprints</td><td>A sprint's name, so the invoice shows a sprint you recognise.</td></tr>
+<tr><td>Read your user profile</td><td>Your time zone, name and email address, to prefill your profile and date invoices correctly.</td></tr>
+<tr><td>Edit work items</td><td>Only the Billable field, when you switch it yourself. Jira blocks this for anyone who couldn't edit that work item by hand.</td></tr>
+<tr><td>Manage project screens</td><td>Placing the Billable field on your screens, from the settings page. Only Jira admins can do this.</td></tr>
+<tr><td>App storage</td><td>Saving your settings, clients and invoices on your site.</td></tr>
+</tbody></table></div></div>
+<div><h4>Where data goes</h4><div class="scroll"><table><thead><tr><th>Service</th><th>What it handles</th></tr></thead><tbody>
+<tr><td>Atlassian <span class="tag in">Stays in Jira</span></td><td>Everything above. It is hosted on Atlassian's infrastructure and covered by Atlassian's own privacy and security terms.</td></tr>
+<tr><td>Resend, EU (Ireland) <span class="tag out">Leaves Jira</span></td><td>Only when you press Send to client: the recipient's address, the subject, the message and the PDF. Logging and retention are turned off on our account, so we can't look back at sent emails.</td></tr>
+</tbody></table></div><p class="muted" style="margin-top:10px">No analytics, no tracking and no advertising. The app has no cookies of its own.</p></div>
+<div class="grid2">
+<div class="card"><h4>How long we keep it</h4><p>Your data stays until you uninstall the app. Atlassian then deletes the app's storage for your site. PDFs you downloaded and emails you sent are outside the app and stay where they are.</p></div>
+<div class="card"><h4>When support sees your data</h4><p>Only with your permission, and only what you choose to share with us, such as a screenshot or an exported invoice. We delete it once your question is solved.</p></div>
+<div class="card"><h4>Error logs</h4><p>Forge keeps standard logs from the app's functions. We use them only to find and fix errors.</p></div>
+<div class="card"><h4>Your rights under the GDPR</h4><p>You're the controller of the data in your invoices, and we process it on your behalf. To exercise a right or ask a question, email <a href="mailto:info@bitflare.nl">info@bitflare.nl</a>. You can also complain to the Dutch data protection authority, the <a href="https://autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.</p></div>
+</div>
+</div></div></div>
+
+<div class="subsection"><div class="sh"><header><div class="k">02</div><h3>Security</h3></header><div class="body">
+<div class="grid2">
+<div class="card hl"><h4>Hosted on Atlassian</h4><p>The app is built on Forge, so it runs on Atlassian's infrastructure, with Atlassian's hosting, encryption and access controls. We have no servers of our own to attack or leak.</p></div>
+<div class="card"><h4>As few permissions as possible</h4><p>The app asks only for the permissions listed above. Anything that changes a work item runs as you, so Jira applies your own access rights.</p></div>
+<div class="card"><h4>PDFs are made in your browser</h4><p>When you download an invoice, the PDF is created on your own computer. It is only sent anywhere when you choose Send to client.</p></div>
+<div class="card"><h4>One outside connection</h4><p>The app can only reach <code>api.resend.com</code>, which is declared in its manifest. Forge blocks every other outside address.</p></div>
+</div>
+<div><h4>Report a security issue</h4><p>Found a vulnerability? Email <a href="mailto:info@bitflare.nl?subject=Security%20report">info@bitflare.nl</a> with "Security" in the subject line. We'll confirm we got it within one business day. Please give us time to fix it before you make it public.</p></div>
+</div></div></div>
+
+<div class="subsection"><div class="sh"><header><div class="k">03</div><h3>Company details</h3></header><div class="body">
+<dl><dt>Name</dt><dd>Bit Flare Software ontwikkeling</dd><dt>Legal form</dt><dd>Eenmanszaak (sole proprietorship)</dd><dt>KvK number</dt><dd>42166689</dd><dt>Branch number</dt><dd>000066724066</dd><dt>Address</dt><dd>Caan van Necklaan 47, 2281 BB Rijswijk, Netherlands</dd><dt>Email</dt><dd><a href="mailto:info@bitflare.nl">info@bitflare.nl</a></dd></dl>
+</div></div></div>
+</section>
+
+<section class="panel" data-panel="support" hidden>
+<div class="panel-head"><h2>Support</h2><p>We answer within one business day (Monday to Friday, Dutch time, CET). You'll hear from the people who build the app.</p></div>
+<div class="chan">
+<div class="card"><b>Email</b><a href="mailto:info@bitflare.nl">info@bitflare.nl</a><p class="muted">Best for questions and feature ideas.</p></div>
+<div class="card"><b>Contact form</b><a href="#contact-form">Write to us below</a><p class="muted">No email app needed.</p></div>
+</div>
+<div style="margin-top:28px"><h4 style="margin:0 0 8px;font:700 17px var(--disp)">Helps us answer faster</h4><ul class="list"><li>Your Jira site address, e.g. <code>yourteam.atlassian.net</code>.</li><li>Where it happened: settings, Declare an invoice, or the project's invoice page.</li><li>What you expected, and what happened instead. A screenshot helps, but hide anything you'd rather not share.</li></ul></div>
+<form id="contact-form" novalidate style="margin-top:28px">
+<div class="f"><label for="cf-name">Name</label><input id="cf-name" name="name" autocomplete="name" required></div>
+<div class="f"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+<div class="f"><label for="cf-site">Jira site <i>(optional)</i></label><input id="cf-site" name="site" placeholder="yourteam.atlassian.net"></div>
+<div class="f"><label for="cf-topic">Topic</label><select id="cf-topic" name="topic"><option>Question</option><option>Something isn't working</option><option>Feature idea</option><option>Billing or licence</option><option>Privacy request</option></select></div>
+<div class="f w"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" required></textarea></div>
+<div class="msg" id="cf-msg-box" role="status"></div>
+<div class="fa"><small>We use what you send only to answer you. We don't keep it on any mailing list.</small><button class="btn" type="submit">Send message</button></div>
+</form>
+</section>
+
+</main>
+
+<footer class="site"><div class="wrap"><span>© 2026 Bit Flare Software ontwikkeling · <a href="mailto:info@bitflare.nl">info@bitflare.nl</a></span><span>Not yet listed on the Atlassian Marketplace</span></div></footer>
+
+<script>
+const TABS=['overview','docs','privacy','support'];
+const tabs=document.querySelectorAll('.tabs a');
+const panels=document.querySelectorAll('.panel');
+function activate(name){
+  if(!TABS.includes(name)) name='overview';
+  panels.forEach(p=>{p.hidden=p.dataset.panel!==name});
+  tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
+  window.scrollTo(0,0);
+}
+function fromHash(){activate((location.hash||'#overview').slice(1))}
+window.addEventListener('hashchange',fromHash);
+fromHash();
+
+const cf=document.getElementById('contact-form'),cfBox=document.getElementById('cf-msg-box');
+const FORM_ENDPOINT=''; // e.g. a Formspree, Web3Forms or own endpoint that accepts JSON POST
+cf.addEventListener('submit',async e=>{e.preventDefault();cfBox.className='msg';
+if(!cf.checkValidity()){cfBox.className='msg err';cfBox.textContent='Please fill in your name, a valid email address and a message.';return}
+const btn=cf.querySelector('button');btn.disabled=true;btn.textContent='Sending…';
+try{if(!FORM_ENDPOINT)throw new Error('no endpoint');
+const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(cf)))});
+if(!r.ok)throw new Error(r.status);cf.reset();cfBox.className='msg ok';cfBox.textContent="Thanks, we'll reply within one business day."}
+catch(err){cfBox.className='msg err';cfBox.innerHTML='Your message couldn’t be sent. Please email <a href="mailto:info@bitflare.nl">info@bitflare.nl</a> instead.'}
+finally{btn.disabled=false;btn.textContent='Send message'}});
+</script>
 </body></html>
