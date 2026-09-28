@@ -115,14 +115,67 @@ a{color:var(--teal)}a:hover{color:var(--or-d)}
 .res{display:flex;flex-direction:column;gap:6px;font-size:14px}.res span{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #EBECF0;padding-top:8px}
 
 /* Documentation panel */
-.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
-.step{border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;background:#fff}
-.step .steprow{display:flex;align-items:center;gap:10px}
-.step .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font:800 13px var(--disp);display:flex;align-items:center;justify-content:center}
-.step h3{margin:0;font:700 16px/1.2 var(--disp);letter-spacing:-.01em;color:var(--teal-d)}
-.step p{margin:0;color:var(--ink);font-size:13.5px;line-height:1.55;text-wrap:pretty}
-.stepshot{border:1px solid var(--line);border-radius:8px;background:#F7F8F9;height:170px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.stepshot img{max-width:100%;max-height:100%;object-fit:contain}
+.lay{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px}
+.toc{position:sticky;top:60px;align-self:start;padding:0 0 40px;display:flex;flex-direction:column;gap:2px}
+.toc b{font:700 12px var(--disp);letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:8px}
+.toc a{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;padding:6px 0;font-size:14px;font-weight:600;color:var(--mut);text-decoration:none}.toc a span{font:700 12px/22px var(--disp);color:var(--or-d)}.toc a:hover{color:var(--teal)}
+.doccontent{min-width:0;padding-bottom:16px}
+.docsection{padding:48px 0;border-bottom:1px solid var(--line)}.docsection:last-of-type{border-bottom:0}
+.docsection .k{font:700 12px var(--disp);letter-spacing:.12em;text-transform:uppercase;color:var(--or-d)}
+.docsection h3{margin:6px 0 12px;font:800 30px/1.1 var(--disp);letter-spacing:-.025em}
+.docsection p{margin:0;text-wrap:pretty;max-width:720px}.docsection p+p{margin-top:10px}
+.docsection code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:#F1F2F4;padding:1px 5px;border-radius:3px}
+.lede{color:var(--mut);font-size:17px}
+ol.st{margin:20px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;max-width:720px;counter-reset:s}
+ol.st li{position:relative;padding-left:40px;counter-increment:s}
+ol.st li::before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--or);color:#fff;font:700 13px/24px var(--disp);text-align:center}
+.pin{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--or);color:#fff;font:700 12px var(--disp);box-shadow:0 0 0 3px #fff}
+.pinw{position:relative}.pinw>.pin{position:absolute;z-index:2}
+.docsection figure{margin:28px 0 0}.docsection figcaption{margin-top:10px;font-size:13px;color:var(--sub)}
+.docshot{background:#EEF1F0;border:1px solid var(--line);border-radius:12px;padding:28px;overflow-x:auto}
+.drow{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.note{margin-top:20px;max-width:720px;background:var(--teal-w);border-radius:8px;padding:14px 16px;font-size:15px}.note b{color:var(--teal-d)}
+.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}
+.faq div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px}.faq h4{margin:0 0 6px;font:700 18px/1.3 var(--disp)}.faq p{font-size:15px;color:var(--mut)}
+
+/* Documentation panel: Atlassian-style app mocks (namespaced m/m-*, plus dcb/dwarn to avoid the Overview panel's own .cb/.warn) */
+.m{font:14px/1.43 -apple-system,"Segoe UI",system-ui,sans-serif;color:#172B4D;background:#fff;border-radius:8px;box-shadow:0 1px 1px #091E4240,0 0 1px #091E424F}
+.m *{box-sizing:border-box}
+.m-pad{padding:20px 24px}
+.m-h1{font:600 24px/1.2 -apple-system,"Segoe UI",system-ui,sans-serif;margin:0 0 14px}
+.m-h2{font:600 20px/1.2 -apple-system,"Segoe UI",system-ui,sans-serif;margin:0 0 14px}
+.m-btn{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:3px;border:1px solid #B7B9BE;background:#fff;font:500 14px -apple-system,"Segoe UI",system-ui,sans-serif;color:#172B4D;white-space:nowrap}
+.m-btn.p{background:#0C66E4;border-color:#0C66E4;color:#fff}.m-btn.s{border-color:transparent;background:transparent;color:#44546F}
+.m-tabs{display:flex;gap:16px;border-bottom:2px solid #DCDFE4;margin:16px 0 0}.m-tabs span{padding:6px 2px;font-weight:500;color:#44546F;margin-bottom:-2px}.m-tabs .on{color:#0C66E4;box-shadow:inset 0 -2px 0 #0C66E4}
+.m-card{border:1px solid #DCDFE4;border-radius:6px;padding:20px;margin-top:16px}
+.m-grid{display:grid;gap:14px 16px}
+.m-f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.m-l{font:600 12px -apple-system,"Segoe UI",system-ui,sans-serif;color:#44546F;display:flex;gap:4px;align-items:center}.m-l i{font-style:normal;color:#AE2E24}.m-l .q{width:13px;height:13px;border:1.4px solid #626F86;border-radius:50%;font:700 9px/10px -apple-system,"Segoe UI",system-ui,sans-serif;text-align:center;color:#626F86}
+.m-i{height:36px;border:1px solid #8C8F97;border-radius:3px;padding:0 8px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;background:#fff}
+.m-i.ph{color:#8590A2}.m-i .cur{color:#626F86}.m-i .ch{margin-left:auto;width:8px;height:8px;border-right:1.5px solid #44546F;border-bottom:1.5px solid #44546F;transform:rotate(45deg) translate(-2px,-2px);flex:none}
+.m-ta{border:1px solid #8C8F97;border-radius:3px;padding:8px;white-space:pre-line;min-height:96px}
+.m-div{grid-column:1/-1;display:flex;align-items:center;gap:10px;font:700 11px -apple-system,"Segoe UI",system-ui,sans-serif;letter-spacing:.04em;color:#626F86;text-transform:uppercase}.m-div::after{content:"";flex:1;height:1px;background:#DCDFE4}
+.m-chips{display:flex;flex-wrap:wrap;gap:6px}.m-chips span{font:12px ui-monospace,Menlo,monospace;border:1px solid #B7B9BE;border-radius:3px;padding:1px 6px;color:#44546F}
+.m-help{font-size:12px;color:#626F86}
+.m-tog{width:32px;height:16px;border-radius:8px;background:#22A06B;position:relative}.m-tog::after{content:"";position:absolute;right:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff}
+.m-menu{width:360px;padding:8px 0}.m-menu .g{font:700 12px -apple-system,"Segoe UI",system-ui,sans-serif;color:#44546F;padding:12px 16px 4px}
+.m-menu .it{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;padding:8px 16px}.m-menu .it b{font-weight:500;display:block}.m-menu .it small{color:#626F86;font-size:12px}.m-menu .it.on{background:#E9F2FF;box-shadow:inset 2px 0 #0C66E4}
+.ico{width:16px;height:16px;border:1.6px solid #44546F;border-radius:4px;margin-top:2px}.ico.c{border-radius:50%}.ico.g4{border:0;background:radial-gradient(circle,#44546F 2.2px,transparent 2.6px) 0 0/8px 8px}
+.m-side{width:260px;padding:14px 10px}.m-side .h{font-weight:600;padding:6px 8px 12px}.m-side .g{font:700 12px -apple-system,"Segoe UI",system-ui,sans-serif;color:#44546F;padding:10px 8px 6px}.m-side .it{padding:7px 8px 7px 28px;border-radius:3px}.m-side .it.on{background:#E9F2FF;color:#0C66E4;font-weight:500;display:flex;justify-content:space-between;padding-left:12px}
+.m-dev{font:700 11px -apple-system,"Segoe UI",system-ui,sans-serif;border:1px solid #B7B9BE;border-radius:3px;padding:0 4px;color:#44546F}
+.m-det{width:440px}.m-det .hd{font-weight:600;padding:12px 16px;border-bottom:1px solid #DCDFE4}.m-det dl{margin:0;display:grid;grid-template-columns:150px minmax(0,1fr);gap:0}.m-det dt,.m-det dd{margin:0;padding:10px 16px}.m-det dt{color:#44546F;font-weight:500;display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}.m-det dd.ph{color:#626F86}
+.av{display:inline-flex;width:22px;height:22px;border-radius:50%;background:#34524E;color:#fff;font:700 10px/22px -apple-system,"Segoe UI",system-ui,sans-serif;justify-content:center;vertical-align:middle;margin-right:6px}
+.dcb{display:inline-block;width:14px;height:14px;border-radius:2px;background:#0C66E4;position:relative;vertical-align:-2px}.dcb::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.m-modal{width:820px;padding:24px}
+.m-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;background:#F7F8F9;border:1px solid #DCDFE4;border-radius:3px;padding:14px 16px;margin-top:16px}.m-sum small{display:block;color:#44546F;font-size:13px;margin-bottom:6px}
+table.m-t{width:100%;border-collapse:collapse;font-size:13px}.m-t th{font:600 12px -apple-system,"Segoe UI",system-ui,sans-serif;color:#44546F;text-align:left;padding:6px 8px;border-bottom:2px solid #DCDFE4;white-space:nowrap}.m-t td{padding:6px 8px;border-bottom:1px solid #DCDFE4;white-space:nowrap;vertical-align:middle}.m-t .r{text-align:right}
+.dwarn{display:inline-block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #E56910;vertical-align:-1px;margin-left:6px}
+.m-tot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;font-size:13px;min-width:280px}.m-tot .t{font-weight:700;border-top:1px solid #DCDFE4;padding-top:8px}
+.m-foot{display:flex;justify-content:flex-end;gap:8px;border-top:1px solid #DCDFE4;margin-top:20px;padding-top:16px}
+.loz{font:700 11px -apple-system,"Segoe UI",system-ui,sans-serif;padding:0 4px;border-radius:3px;text-transform:uppercase}.loz.o{background:#E9F2FF;color:#0055CC}.loz.p{background:#DCFFF1;color:#216E4E}.loz.x{background:#FFECEB;color:#AE2E24}
+.m-stats{display:flex;gap:28px;border:1px solid #DCDFE4;border-radius:6px;padding:12px 16px;background:#F7F8F9}.m-stats small{display:block;color:#44546F;font-size:12px}.m-stats b{font-size:16px}
+.lnk{color:#0C66E4}.rem{font-size:12px;color:#626F86}.rem::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#E56910;margin-right:5px;vertical-align:1px}
+.m-pop{position:absolute;right:8px;width:190px;padding:6px 0;z-index:3;box-shadow:0 8px 12px #091E4226,0 0 1px #091E424F}.m-pop div{padding:7px 14px}.m-pop hr{border:0;border-top:1px solid #DCDFE4;margin:4px 0}.m-pop .on{background:#E9F2FF;box-shadow:inset 2px 0 #0C66E4}
 
 /* Privacy/Security/Support panels */
 .subsection{padding:0 0 40px}
@@ -161,7 +214,7 @@ dl{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px
 
 footer.site{padding:32px 0 48px;font-size:13px;color:var(--sub);border-top:1px solid var(--line);margin-top:24px}
 footer.site .wrap{display:flex;gap:12px 24px;flex-wrap:wrap;justify-content:space-between}
-@media (max-width:860px){.hd{grid-template-columns:auto minmax(0,1fr)}.cta{grid-column:1/-1;align-items:flex-start}.pitch,.hl,.cols,.sh{grid-template-columns:1fr;gap:24px}.hl.flip .txt{order:0}.story{grid-template-columns:1fr;padding:28px}.steps{grid-template-columns:1fr}}
+@media (max-width:860px){.hd{grid-template-columns:auto minmax(0,1fr)}.cta{grid-column:1/-1;align-items:flex-start}.pitch,.hl,.cols,.sh,.lay{grid-template-columns:1fr;gap:24px}.hl.flip .txt{order:0}.story{grid-template-columns:1fr;padding:28px}.toc{position:static;padding:24px 0 0;flex-direction:row;flex-wrap:wrap;gap:4px 18px}.toc b{width:100%}.docshot{padding:16px}}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -301,33 +354,182 @@ footer.site .wrap{display:flex;gap:12px 24px;flex-wrap:wrap;justify-content:spac
 </section>
 
 <section class="panel" data-panel="docs" hidden>
-<div class="panel-head"><h2>How it works</h2><p>Configure your company once. From then on, invoice straight from any work item, epic, sprint or project — built from hours you actually logged, never estimates, never billed twice.</p></div>
-<div class="steps">
+<div class="panel-head"><h2>From logged hours to a paid invoice</h2><p>Set up once, then invoice straight from a work item. Most teams send their first invoice within ten minutes.</p></div>
+<div class="lay">
+<nav class="toc" aria-label="Contents"><b>Contents</b>
+<a href="#open"><span>01</span>Open the settings</a><a href="#company"><span>02</span>Company and VAT</a><a href="#email"><span>03</span>Emails and reminders</a><a href="#extras"><span>+</span>Optional: make it yours</a><a href="#billable"><span>04</span>Mark work billable</a><a href="#declare"><span>05</span>Declare an invoice</a><a href="#track"><span>06</span>Track and send</a><a href="#faq"><span>07</span>Good to know</a>
+</nav>
+<div class="doccontent">
 
-<div class="step">
-<div class="steprow"><span class="num">1</span><h3>Set up your company — once</h3></div>
-<div class="stepshot"><img src="images/settings_3_start_the_setup_wizard_or_fill_the_form.png" alt="Company and invoice details settings form"></div>
-<p>Open <b>Jira admin settings → Marketplace apps → Jira Factuur</b>. Run the setup wizard or fill in the form yourself: company details, VAT regime, IBAN and a default hourly rate. Add your clients and customise the email and reminder texts here too — you won't need to touch this page again to invoice.</p>
+<section class="docsection" id="open"><div class="k">Step 01</div><h3>Open the settings</h3>
+<p class="lede">After installing from the Atlassian Marketplace, a Jira admin opens the app's settings once.</p>
+<ol class="st"><li>Click the gear icon at the top right of Jira and choose <b>Marketplace apps</b>.</li><li>In the sidebar under <b>Apps</b>, choose <b>Jira Factuur</b>.</li></ol>
+<figure><div class="docshot"><div class="drow">
+<div class="m m-menu pinw"><div class="g">Personal Jira settings</div>
+<div class="it"><span class="ico c"></span><span><b>General settings</b><small>Language, time zone and other preferences</small></span></div>
+<div class="it"><span class="ico"></span><span><b>Notification settings</b><small>Email and in-app notifications</small></span></div>
+<div class="g">Jira admin settings</div>
+<div class="it"><span class="ico"></span><span><b>System</b><small>General configuration, security and more</small></span></div>
+<div class="it"><span class="ico g4"></span><span><b>Jira apps</b><small>Access, settings and integrations</small></span></div>
+<div class="it"><span class="ico"></span><span><b>Work items</b><small>Work types, workflows, screens and fields</small></span></div>
+<div class="it on"><span class="ico g4"></span><span><b>Marketplace apps</b><small>Add and manage Jira Marketplace apps</small></span></div>
+<span class="pin" style="right:-10px;top:370px">1</span></div>
+<div class="m m-side pinw"><div class="h">← Jira admin settings</div><div class="g">Switch settings</div><div class="m-i" style="margin:0 8px 8px">Marketplace apps<span class="ch"></span></div>
+<div class="it">Manage apps</div><div class="it">OAuth credentials</div><div class="g">Apps</div>
+<div class="it on">Jira Factuur</div><span class="pin" style="right:-10px;top:222px">2</span></div>
+</div></div><figcaption>Jira's settings menu, then the Marketplace apps sidebar.</figcaption></figure>
+</section>
+
+<section class="docsection" id="company"><div class="k">Step 02</div><h3>Company and VAT</h3>
+<p class="lede">These details appear on every invoice. The setup wizard walks you through them, or you can fill in the form directly.</p>
+<ol class="st"><li>Fill in your company name, Chamber of Commerce (KvK) number and address.</li><li>Under <b>VAT and payment</b>, pick your VAT regime and add your VAT number and IBAN. Standard, reduced, zero, reverse charge, KOR and a custom rate are all supported.</li><li>Set your payment term and default hourly rate, then click <b>Save</b> on each card.</li></ol>
+<figure><div class="docshot"><div class="m m-pad" style="min-width:760px">
+<div class="m-h1">Company and invoice details</div><span class="m-btn">Run setup again</span>
+<div class="m-tabs"><span class="on">Settings</span><span>Email</span><span>Clients</span><span>Invoices</span></div>
+<div class="m-card"><div class="m-h2">Company</div>
+<div class="m-grid" style="grid-template-columns:repeat(6,minmax(0,1fr))">
+<div class="m-f" style="grid-column:span 3"><span class="m-l">Company name<i>*</i><span class="q">?</span></span><div class="m-i">Bit Flare Software ontwikkeling</div></div>
+<div class="m-f" style="grid-column:span 3"><span class="m-l">Chamber of Commerce number<i>*</i><span class="q">?</span></span><div class="m-i">42166689</div></div>
+<div class="m-div">Address</div>
+<div class="m-f" style="grid-column:span 4"><span class="m-l">Address<i>*</i></span><div class="m-i">Caan van Necklaan 47</div></div>
+<div class="m-f" style="grid-column:span 2"><span class="m-l">Postcode<i>*</i></span><div class="m-i">2281 BB</div></div>
+<div class="m-f" style="grid-column:span 3"><span class="m-l">City<i>*</i></span><div class="m-i">Rijswijk</div></div>
+<div class="m-f" style="grid-column:span 3"><span class="m-l">Country<i>*</i></span><div class="m-i">Netherlands</div></div>
+<div class="m-div">Contact</div>
+<div class="m-f" style="grid-column:span 2"><span class="m-l">Email address</span><div class="m-i">info@bitflare.nl</div></div>
+<div class="m-f" style="grid-column:span 2"><span class="m-l">Phone number</span><div class="m-i ph">06 12345678</div></div>
+<div class="m-f" style="grid-column:span 2"><span class="m-l">Website</span><div class="m-i">bitflare.nl</div></div>
+</div><div style="margin-top:16px"><span class="m-btn p">Save</span></div></div>
+<div class="m-card pinw"><div class="m-h2">VAT and payment</div>
+<div class="m-grid" style="grid-template-columns:repeat(6,minmax(0,1fr))">
+<div class="m-f" style="grid-column:span 3"><span class="m-l">VAT regime<i>*</i><span class="q">?</span></span><div class="m-i">VAT 21% (standard rate)<span class="ch"></span></div></div>
+<div class="m-f" style="grid-column:span 3"><span class="m-l">VAT number<i>*</i></span><div class="m-i">NL000000000B01</div></div>
+<div class="m-f" style="grid-column:span 3"><span class="m-l">IBAN<i>*</i></span><div class="m-i">NL00 BANK 0123 4567 89</div></div>
+<div class="m-f" style="grid-column:span 1"><span class="m-l">Payment term (days)<i>*</i></span><div class="m-i">14</div></div>
+<div class="m-f" style="grid-column:span 2"><span class="m-l">Default hourly rate<i>*</i></span><div class="m-i"><span class="cur">€</span>95</div></div>
+</div><div style="margin-top:16px"><span class="m-btn p">Save</span></div><span class="pin" style="left:-11px;top:64px">2</span></div>
+</div></div><figcaption>The Settings tab. The optional settings further down this page are covered in the next section.</figcaption></figure>
+</section>
+
+<section class="docsection" id="email"><div class="k">Step 03</div><h3>Emails and reminders</h3>
+<p class="lede">Write the email your client receives with the PDF. Placeholders in curly braces are filled in per invoice.</p>
+<ol class="st"><li>On the <b>Email</b> tab, set the subject and body. Click a placeholder chip to insert it.</li><li>Under <b>Reminders</b>, switch on <b>Send payment reminders automatically</b>. Reminders go out by themselves once an invoice is past its due date.</li></ol>
+<figure><div class="docshot"><div class="m m-pad" style="min-width:680px">
+<div class="m-tabs" style="margin-top:0"><span>Settings</span><span class="on">Email</span><span>Clients</span><span>Invoices</span></div>
+<div class="m-card"><div class="m-h2">Email</div><div class="m-grid">
+<div class="m-f"><span class="m-l">Email subject<span class="q">?</span></span><div class="m-i">Invoice {invoiceNumber} from {companyName}</div></div>
+<div class="m-f"><span class="m-l">Email body<span class="q">?</span></span><div class="m-ta">Dear {clientName},
+
+Please find attached invoice {invoiceNumber} for {total}. We kindly ask you to transfer the amount by {paymentDueDate}.
+
+Kind regards,
+{companyName}</div></div>
+<div class="m-chips"><span>{invoiceNumber}</span><span>{clientName}</span><span>{total}</span><span>{paymentDueDate}</span><span>{companyName}</span><span>{companyEmail}</span><span>{companyIban}</span><span>{companyKvkNumber}</span></div>
+</div><div style="margin-top:16px"><span class="m-btn p">Save</span></div></div>
+<div class="m-card pinw"><div class="m-h2">Reminders</div><div class="m-grid">
+<div class="m-f"><span class="m-l">Send payment reminders automatically<span class="q">?</span></span><div class="m-tog"></div></div>
+<div class="m-f"><span class="m-l">Reminder subject</span><div class="m-i">Payment reminder for invoice {invoiceNumber}</div></div>
+</div><span class="pin" style="left:-11px;top:70px">2</span></div>
+</div></div><figcaption>The Email tab. The reminder body works the same way, with an extra {reminderNumber} placeholder.</figcaption></figure>
+</section>
+
+<section class="docsection" id="extras"><div class="k">Optional</div><h3>Make it yours</h3>
+<p class="lede">The rest of the Settings tab has sensible defaults, so you can skip it and come back any time.</p>
+<figure><div class="docshot"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;align-items:start;min-width:340px">
+<div class="m m-pad"><div class="m-h2">Invoice look</div>
+<div class="m-f"><span class="m-l">Invoice template</span><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<div style="border:1px solid #B7B9BE;border-radius:4px;padding:10px;text-align:center;font-size:13px"><div style="height:44px;border:1px solid #DCDFE4;border-radius:2px;margin-bottom:8px;padding:5px;display:flex;flex-direction:column;gap:3px"><i style="height:8px;background:#626F86;border-radius:2px"></i><i style="height:2px;background:#DCDFE4"></i><i style="height:2px;background:#DCDFE4"></i></div>Letterhead</div>
+<div style="border:2px solid #0C66E4;background:#E9F2FF;border-radius:4px;padding:9px;text-align:center;font-size:13px;font-weight:600"><div style="height:44px;border:1px solid #DCDFE4;background:#fff;border-radius:2px;margin-bottom:8px;padding:5px;display:flex;flex-direction:column;gap:3px"><i style="height:2px;background:#626F86"></i><i style="height:2px;background:#DCDFE4"></i><i style="height:2px;background:#DCDFE4"></i><i style="height:2px;background:#DCDFE4"></i></div>Ledger</div>
+<div style="border:1px solid #B7B9BE;border-radius:4px;padding:10px;text-align:center;font-size:13px"><div style="height:44px;border:1px solid #DCDFE4;border-radius:2px;margin-bottom:8px;padding:5px;display:flex;flex-direction:column;gap:3px"><i style="height:2px;background:#DCDFE4"></i><i style="height:2px;background:#DCDFE4"></i></div>Minimal</div></div></div>
+<div class="m-f" style="margin-top:14px"><span class="m-l">Accent colour</span><div style="display:flex;gap:10px;align-items:center"><div class="m-i" style="width:130px"><span style="width:16px;height:16px;border-radius:3px;background:#34524E"></span>#34524E</div><span style="display:flex;gap:6px"><i style="width:18px;height:18px;border-radius:50%;background:#C9372C"></i><i style="width:18px;height:18px;border-radius:50%;background:#C25100"></i><i style="width:18px;height:18px;border-radius:50%;background:#34524E;box-shadow:0 0 0 2px #fff,0 0 0 4px #34524E"></i><i style="width:18px;height:18px;border-radius:50%;background:#1D7AFC"></i><i style="width:18px;height:18px;border-radius:50%;background:#964AC0"></i></span></div></div>
+<div class="m-f" style="margin-top:14px"><span class="m-l">Logo</span><div style="border:1px dashed #8C8F97;border-radius:3px;padding:10px;color:#44546F;font-size:13px;display:flex;gap:8px;align-items:center">Drop files to attach or <span class="m-btn" style="height:28px">browse</span></div><span class="m-help">PNG, JPG, SVG or WebP. 150 KB at most.</span></div>
+<div class="m-f" style="margin-top:14px"><span class="m-l">Payment QR code on the invoice</span><div class="m-tog"></div></div></div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div class="m m-pad"><div class="m-h2">Roles</div>
+<div style="display:flex;gap:8px;align-items:center;font-size:13px"><div class="m-tog"></div>Show amounts when declaring an invoice</div>
+<table class="m-t" style="margin-top:12px"><thead><tr><th>Name</th><th>Hourly rate</th><th></th></tr></thead><tbody>
+<tr><td>Designer</td><td>€ 85</td><td class="r lnk">Edit</td></tr><tr><td>Developer</td><td>€ 95</td><td class="r lnk">Edit</td></tr><tr><td>QA</td><td>€ 70</td><td class="r lnk">Edit</td></tr></tbody></table>
+<div style="margin-top:12px"><span class="m-btn">Add a role</span></div></div>
+<div class="m m-pad"><div class="m-h2">Invoice numbering</div>
+<div class="m-f"><span class="m-l">Format</span><div class="m-i">Year and month, then a running number<span class="ch"></span></div></div>
+<p style="margin-top:10px;font-size:13px">Your next invoice will be numbered <b>2026-09-022</b>.</p></div>
+</div></div></div><figcaption>Invoice look, Roles and Invoice numbering on the Settings tab.</figcaption></figure>
+<div class="faq">
+<div><h4>Invoice look</h4><p>Pick Letterhead, Ledger or Minimal, an accent colour and your logo. Every template also works without a logo. The live preview next to the form updates as you change it, and you can download a test invoice.</p></div>
+<div><h4>Roles</h4><p>Add roles such as Designer or Developer, each with an hourly rate. When declaring, pick a role instead of typing a rate. Switch off <b>Show amounts</b> if colleagues declare invoices but shouldn't see rates.</p></div>
+<div><h4>Invoice numbering</h4><p>Choose how numbers are built, for example <code>2026-022</code> or <code>2026-09-022</code>. Numbers never repeat, and a change only applies to new invoices.</p></div>
 </div>
+</section>
 
-<div class="step">
-<div class="steprow"><span class="num">2</span><h3>Mark what's billable</h3></div>
-<div class="stepshot"><img src="images/Billable_invoice_description.png" alt="Billable toggle and invoice description on a work item"></div>
-<p>Every work item gets two fields: <b>Billable</b> (on by default — switch it off for work that shouldn't be charged) and an optional <b>Invoice description</b> to clarify what a line means to the client.</p>
+<section class="docsection" id="billable"><div class="k">Step 04</div><h3>Mark work billable</h3>
+<p class="lede">The app adds two fields to your work items. Log time as usual; these decide what ends up on the invoice.</p>
+<ol class="st"><li><b>Billable</b> is on by default. Switch it off for internal work you don't charge for.</li><li><b>Invoice description</b> replaces the work item's summary on the invoice. Leave it empty to use the summary.</li></ol>
+<figure><div class="docshot"><div class="m m-det pinw"><div class="hd">Details</div><dl>
+<dt>Assignee</dt><dd><span class="av">BF</span>Bit Flare</dd>
+<dt>Due date</dt><dd class="ph">Add due date</dd>
+<dt>Billable <span class="m-dev">APP</span></dt><dd><span class="dcb"></span> Billable<div class="m-help" style="margin-top:4px">Off means this work stays off invoices.</div></dd>
+<dt>Invoice description <span class="m-dev">APP</span></dt><dd>Homepage design and two revision rounds</dd>
+<dt>Time tracking</dt><dd><div style="height:4px;background:#0C66E4;border-radius:2px;width:78%"></div><span class="m-help">1d 2h 30m logged</span></dd>
+</dl><span class="pin" style="left:-11px;top:147px">1</span><span class="pin" style="left:-11px;top:210px">2</span></div>
+</div><figcaption>A work item's Details panel.</figcaption></figure>
+<div class="note"><b>Tip:</b> if the fields don't show, a Jira admin can add them to your project's screens from the app's settings page.</div>
+</section>
+
+<section class="docsection" id="declare"><div class="k">Step 05</div><h3>Declare an invoice</h3>
+<p class="lede">Open any work item and choose <b>Declare an invoice</b>. For an epic or parent, every billable child item with logged time becomes a line.</p>
+<ol class="st"><li>Pick the client under <b>Bill to</b>, or click <b>Add a client</b> to create one on the spot.</li><li>Check each line. Choose a <b>role</b> to use its rate, or pick <b>Own rate</b> and type one in. You can change hours, description and a discount per line.</li><li>Add a discount on the whole invoice if needed, then click <b>Issue invoice</b>.</li></ol>
+<figure><div class="docshot"><div class="m m-modal pinw">
+<div style="display:flex;justify-content:space-between;align-items:center"><div style="font:600 16px -apple-system,'Segoe UI',system-ui,sans-serif">Declare an invoice</div><span style="color:#44546F;font-size:18px">×</span></div>
+<div class="m-h1" style="margin:10px 0 16px">Invoice · JFS-1</div>
+<div class="m-f"><span class="m-l">Bill to</span><div class="m-i">Studio Noord B.V. · Rotterdam<span class="ch"></span></div></div>
+<div style="margin-top:8px"><span class="m-btn">Add a client</span></div>
+<div class="m-sum"><div><small>Invoice date</small>27 September 2026</div><div><small>Work performed</small>1 Sep 2026 to 27 Sep 2026</div><div><small>Due date</small>11 October 2026</div></div>
+<div style="display:flex;gap:16px;margin:18px 0 6px;font-size:13px"><span>Billed work: 4</span><span class="lnk">Hide lines</span></div>
+<table class="m-t"><thead><tr><th>Billable</th><th>Work item</th><th>Description</th><th>Hours</th><th>Rate</th><th>Discount</th><th class="r">Amount</th></tr></thead><tbody>
+<tr><td><span class="dcb"></span></td><td>JFS-2</td><td><div class="m-i" style="height:32px;width:150px">Homepage design</div></td><td><div class="m-i" style="height:32px;width:56px">10.5</div></td><td><div class="m-i" style="height:32px;width:180px"><span class="cur">€</span>85<span style="margin-left:auto">Designer</span><span class="ch" style="margin-left:6px"></span></div></td><td><div class="m-i" style="height:32px;width:64px">0<span style="margin-left:auto" class="cur">%</span></div></td><td class="r">€ 892.50</td></tr>
+<tr><td><span class="dcb"></span></td><td>JFS-3</td><td><div class="m-i" style="height:32px;width:150px">Contact form</div></td><td><div class="m-i" style="height:32px;width:56px">4.5</div></td><td><div class="m-i" style="height:32px;width:180px"><span class="cur">€</span>95<span style="margin-left:auto">Developer</span><span class="ch" style="margin-left:6px"></span></div></td><td><div class="m-i" style="height:32px;width:64px">0<span style="margin-left:auto" class="cur">%</span></div></td><td class="r">€ 427.50</td></tr>
+<tr><td><span class="dcb"></span></td><td>JFS-4</td><td><div class="m-i" style="height:32px;width:150px">SEO optimisation</div></td><td><div class="m-i" style="height:32px;width:56px">12</div></td><td><div class="m-i" style="height:32px;width:180px"><span class="cur">€</span>75<span style="margin-left:auto">Own rate</span><span class="ch" style="margin-left:6px"></span></div></td><td><div class="m-i" style="height:32px;width:64px">0<span style="margin-left:auto" class="cur">%</span></div></td><td class="r">€ 900.00</td></tr>
+<tr><td><span class="dcb"></span><span class="dwarn" title="Not finished yet"></span></td><td>JFS-9</td><td><div class="m-i" style="height:32px;width:150px">Form validation</div></td><td><div class="m-i" style="height:32px;width:56px">1.5</div></td><td><div class="m-i" style="height:32px;width:180px"><span class="cur">€</span>95<span style="margin-left:auto">Developer</span><span class="ch" style="margin-left:6px"></span></div></td><td><div class="m-i" style="height:32px;width:64px">0<span style="margin-left:auto" class="cur">%</span></div></td><td class="r">€ 142.50</td></tr>
+</tbody></table>
+<div style="display:flex;justify-content:space-between;gap:24px;margin-top:20px;flex-wrap:wrap">
+<div class="m-f"><span class="m-l">Discount</span><div style="display:flex;gap:8px"><div class="m-i" style="width:72px">10<span style="margin-left:auto" class="cur">%</span></div><span class="m-btn" style="height:36px">Apply discount</span></div><span class="m-help">Applied to the subtotal, before VAT.</span></div>
+<div class="m-tot"><span>Subtotal (excl. VAT)</span><span class="r">€ 2,362.50</span><span>Discount (10%)</span><span class="r">−€ 236.25</span><span>VAT 21%</span><span class="r">€ 446.51</span><span class="t">Total</span><span class="t r">€ 2,572.76</span></div>
 </div>
+<div class="m-foot"><span class="m-btn s">Cancel</span><span class="m-btn p">Issue invoice</span></div>
+<span class="pin" style="left:-11px;top:92px">1</span><span class="pin" style="left:520px;top:339px">2</span><span class="pin" style="left:-11px;top:575px">3</span>
+</div></div><figcaption>Declaring an invoice for a parent with four child items. The warning marks work that isn't finished yet; hover it for details.</figcaption></figure>
+<div class="note"><b>Before you issue:</b> the app warns you when work was already on an earlier invoice or isn't done yet. You can still issue the invoice; the warning is there so nothing is billed twice by accident.</div>
+</section>
 
-<div class="step">
-<div class="steprow"><span class="num">3</span><h3>Declare an invoice</h3></div>
-<div class="stepshot"><img src="images/Declare_invoice_with_multiple_childItems.png" alt="Declare an invoice dialog with multiple child work items"></div>
-<p>Trigger <b>Declare an invoice</b> from a work item, epic, sprint or project. Hours come only from logged time, one line per item — so work already on an earlier invoice is flagged, never charged twice. Review rates, discounts and VAT, then issue.</p>
+<section class="docsection" id="track"><div class="k">Step 06</div><h3>Track and send</h3>
+<p class="lede">The <b>Invoices</b> tab lists everything you've issued, with what's outstanding at the top.</p>
+<ol class="st"><li>Click <b>Export</b> on a row to download the PDF, email it to the client, or send a reminder now.</li><li>Click <b>Mark as paid</b> when the money arrives. Paid invoices stop getting reminders.</li><li>Use <b>Export all as CSV</b> for your accountant.</li></ol>
+<figure><div class="docshot"><div class="m m-pad" style="min-width:900px">
+<div class="m-tabs" style="margin:0 0 16px"><span>Settings</span><span>Email</span><span>Clients</span><span class="on">Invoices</span></div>
+<div class="m-stats"><div><small>Outstanding</small><b>€ 5,355.76</b></div><div><small>Overdue</small><b>2</b></div><div><small>Open</small><b>2</b></div><div><small>Paid</small><b>2</b></div></div>
+<div style="margin:14px 0"><span class="m-btn">Export all as CSV</span></div>
+<div class="pinw" style="width:max-content"><table class="m-t"><thead><tr><th>Invoice number</th><th>Invoice date</th><th>Due date</th><th>Client</th><th>Scope</th><th class="r">Total</th><th>Status</th><th>Sent / reminder</th><th></th><th>Export</th></tr></thead><tbody>
+<tr><td>2026-021</td><td>27 Sep 2026</td><td>11 Oct 2026</td><td>Studio Noord B.V.</td><td>JFS-1</td><td class="r">€ 2,572.76</td><td><span class="loz o">Open</span></td><td>27 Sep 2026</td><td class="lnk">Mark as paid</td><td class="lnk">Export</td></tr>
+<tr><td>2026-020</td><td>23 Sep 2026</td><td>7 Oct 2026</td><td>Van Dijk Retail</td><td>JFS-4</td><td class="r">€ 1,089.00</td><td><span class="loz o">Open</span></td><td>23 Sep 2026</td><td class="lnk">Mark as paid</td><td class="lnk">Export</td></tr>
+<tr><td>2026-019</td><td>5 Sep 2026</td><td>19 Sep 2026</td><td>Studio Noord B.V.</td><td>Sprint 35</td><td class="r">€ 3,448.50</td><td><span class="loz p">Paid</span></td><td>5 Sep 2026</td><td class="lnk">Mark as open</td><td class="lnk">Export</td></tr>
+<tr><td>2026-018</td><td>5 Sep 2026</td><td>19 Sep 2026</td><td>Van Dijk Retail</td><td>JFS-6</td><td class="r">€ 726.00</td><td><span class="loz x">Overdue</span></td><td><span class="rem">1st reminder · 26 Sep</span></td><td class="lnk">Mark as paid</td><td class="lnk">Export</td></tr>
+<tr><td>2026-017</td><td>28 Aug 2026</td><td>11 Sep 2026</td><td>Hofstad Media</td><td>Project Web</td><td class="r">€ 1,815.00</td><td><span class="loz p">Paid</span></td><td>28 Aug 2026</td><td class="lnk">Mark as open</td><td class="lnk">Export</td></tr>
+<tr><td>2026-016</td><td>17 Aug 2026</td><td>31 Aug 2026</td><td>Hofstad Media</td><td>JFS-2</td><td class="r">€ 968.00</td><td><span class="loz x">Overdue</span></td><td><span class="rem">2nd reminder · 14 Sep</span></td><td class="lnk">Mark as paid</td><td class="lnk">Export</td></tr>
+</tbody></table>
+<div class="m m-pop" style="top:62px;right:0"><div class="on">Download as PDF</div><div>Send to client</div><div>Send reminder</div><hr><div>Turn reminders off</div></div>
+<span class="pin" style="right:30px;top:6px">1</span><span class="pin" style="left:800px;top:34px">2</span></div>
+</div></div><figcaption>The Invoices tab with the Export menu open.</figcaption></figure>
+</section>
+
+<section class="docsection" id="faq"><div class="k">07</div><h3>Good to know</h3>
+<div class="faq">
+<div><h4>Discounts</h4><p>Give a discount per line, on the whole invoice, or both. Discounts are taken off before VAT.</p></div>
+<div><h4>Your data</h4><p>Everything stays in Atlassian's storage for your Jira site. Read more in <a href="#privacy">Privacy, security &amp; support</a>.</p></div>
 </div>
+<p style="margin-top:24px">Stuck? Email <a href="mailto:info@bitflare.nl">info@bitflare.nl</a>. We answer within one business day.</p>
+</section>
 
-<div class="step">
-<div class="steprow"><span class="num">4</span><h3>Get paid</h3></div>
-<div class="stepshot"><img src="images/invoice_overview_1.png" alt="Invoice overview list with statuses"></div>
-<p>The project's <b>Invoices</b> tab tracks every invoice's status — open, overdue or paid. From there, email the PDF straight to your client with a payment QR code attached, or download it yourself, and turn on automatic reminders before and on the due date.</p>
 </div>
-
 </div>
 </section>
 
@@ -400,12 +602,17 @@ const TABS=['overview','docs','privacy','support'];
 const tabs=document.querySelectorAll('.tabs a');
 const panels=document.querySelectorAll('.panel');
 function activate(name){
-  if(!TABS.includes(name)) name='overview';
   panels.forEach(p=>{p.hidden=p.dataset.panel!==name});
   tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
   window.scrollTo(0,0);
 }
-function fromHash(){activate((location.hash||'#overview').slice(1))}
+function fromHash(){
+  const name=(location.hash||'#overview').slice(1);
+  // Only top-level tab hashes switch panels; anything else (e.g. #open, #company,
+  // #contact-form) is an in-page anchor inside whichever panel is already showing,
+  // so the browser's native anchor scrolling handles it untouched.
+  if(TABS.includes(name)) activate(name);
+}
 window.addEventListener('hashchange',fromHash);
 fromHash();
 
