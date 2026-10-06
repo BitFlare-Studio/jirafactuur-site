@@ -537,7 +537,7 @@ Kind regards,
 <div class="panel-head"><h2>Privacy &amp; security</h2><p>Your invoices stay in your Jira. Here's how Jira Factuur handles your data, and how it's secured.</p></div>
 
 <div class="subsection"><div class="sh"><header><div class="k">01</div><h3>Privacy</h3></header><div class="body">
-<div><h4>The short version</h4><p>Jira Factuur runs on Atlassian Forge, inside your Jira Cloud site. Your company details, clients, roles and invoices are stored in Atlassian's storage for your site. We have no database of our own and no way to read it.</p><p>The app sends something outside Atlassian in one case only: when you press <b>Send to client</b>, the invoice email and its PDF go out through our email provider.</p></div>
+<div><h4>The short version</h4><p>Jira Factuur runs on Atlassian Forge, inside your Jira Cloud site. Your company details, clients, roles and invoices are stored in Atlassian's storage for your site. We have no database of our own and no way to read it.</p><p>The app sends something outside Atlassian in two cases, both of them an email to your client: when you press <b>Send to client</b>, and when an automatic payment reminder goes out. Both leave through our email provider. The invoice email carries its PDF, and a reminder carries that same PDF when one has already been made. Automatic reminders stay off until you switch them on.</p></div>
 <div><h4>What the app stores</h4><p class="muted">All of it is stored in Atlassian's storage for your Jira site, and none of it is shared between sites.</p>
 <ul class="list"><li>Your company profile: name, address, KvK and VAT numbers, IBAN, logo and invoice footer.</li><li>Your clients, and the roles and rates you define.</li><li>Issued invoices, the invoice number counter and your reminder settings.</li><li>Two Jira fields the app adds to work items: <i>Billable</i> and <i>Invoice description</i>.</li></ul></div>
 <div><h4>What it reads from Jira, and why</h4><div class="scroll"><table><thead><tr><th>Permission</th><th>Used for</th></tr></thead><tbody>
@@ -550,7 +550,7 @@ Kind regards,
 </tbody></table></div></div>
 <div><h4>Where data goes</h4><div class="scroll"><table><thead><tr><th>Service</th><th>What it handles</th></tr></thead><tbody>
 <tr><td>Atlassian <span class="tag in">Stays in Jira</span></td><td>Everything above. It is hosted on Atlassian's infrastructure and covered by Atlassian's own privacy and security terms.</td></tr>
-<tr><td>Resend, EU (Ireland) <span class="tag out">Leaves Jira</span></td><td>Only when you press Send to client: the recipient's address, the subject, the message and the PDF. Logging and retention are turned off on our account, so we can't look back at sent emails.</td></tr>
+<tr><td>Resend, EU (Ireland) <span class="tag out">Leaves Jira</span></td><td>When you press Send to client, and when an automatic payment reminder goes out: the recipient's address, the subject, the message and the PDF. Logging and retention are turned off on our account, so we can't look back at sent emails.</td></tr>
 </tbody></table></div><p class="muted" style="margin-top:10px">No analytics, no tracking and no advertising. The app has no cookies of its own.</p></div>
 <div class="grid2">
 <div class="card"><h4>How long we keep it</h4><p>Your data stays until you uninstall the app. Atlassian then deletes the app's storage for your site. PDFs you downloaded and emails you sent are outside the app and stay where they are.</p></div>
@@ -564,7 +564,7 @@ Kind regards,
 <div class="grid2">
 <div class="card hl"><h4>Hosted on Atlassian</h4><p>The app is built on Forge, so it runs on Atlassian's infrastructure, with Atlassian's hosting, encryption and access controls. We have no servers of our own to attack or leak.</p></div>
 <div class="card"><h4>As few permissions as possible</h4><p>The app asks only for the permissions listed above. Anything that changes a work item runs as you, so Jira applies your own access rights.</p></div>
-<div class="card"><h4>PDFs are made in your browser</h4><p>When you download an invoice, the PDF is created on your own computer. It is only sent anywhere when you choose Send to client.</p></div>
+<div class="card"><h4>PDFs are made in your browser</h4><p>When you download an invoice, the PDF is created on your own computer. It is only sent anywhere when you choose Send to client, or with a reminder for an invoice you already sent.</p></div>
 <div class="card"><h4>One outside connection</h4><p>The app can only reach <code>api.resend.com</code>, which is declared in its manifest. Forge blocks every other outside address.</p></div>
 </div>
 <div><h4>Report a security issue</h4><p>Found a vulnerability? Email <a href="mailto:info@bitflare.nl?subject=Security%20report">info@bitflare.nl</a> with "Security" in the subject line. We'll confirm we got it within one business day. Please give us time to fix it before you make it public.</p></div>
